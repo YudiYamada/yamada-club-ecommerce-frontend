@@ -1,14 +1,27 @@
 .header-container {
   width: 100%;
-  background-color: #212529;
+  background-color: var(--card);
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  color: #f8f9fa;
+  color: var(--card-foreground);
 
   .header-title {
     font-weight: boold;
     font-size: 1.5rem;
+    transition: ease-in-out 0.5s;
+
+    &:hover {
+      color: var(--primary);
+      cursor: pointer;
+    }
+  }
+
+  .header-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
   }
 
   .header-items {
@@ -22,7 +35,10 @@
     font-size: 1rem;
     display: flex;
     align-items: center;
-    & {
+    transition: ease-in-out 0.5s;
+
+    &:hover {
+      color: var(--primary);
       cursor: pointer;
     }
   }
