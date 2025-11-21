@@ -1,26 +1,26 @@
-import "./header.component.css";
-
 import { BsCart3 } from "react-icons/bs";
 
-import ThemeToggleButton from "../theme-toggle-button/theme.toggle.button.component";
+import {
+  HeaderContainer,
+  HeaderItem,
+  HeaderItems,
+  HeaderTitle,
+} from "./header.styles";
 
 function Header() {
   return (
-    <header className="header-container">
-      <h2 className="header-title">YAMADA CLUB CLOTHING</h2>
+    <HeaderContainer>
+      <HeaderTitle className="header-title">YAMADA CLUB CLOTHING</HeaderTitle>
 
-      <div className="header-menu">
-        <ul className="header-items">
-          <li className="header-item">Explorar</li>
-          <li className="header-item">Login</li>
-          <li className="header-item">Criar</li>
-          <li className="header-item">
-            <BsCart3 size={25} />5
-          </li>
-        </ul>
-        <ThemeToggleButton />
-      </div>
-    </header>
+      <HeaderItems className="header-items">
+        <HeaderItem className="header-item">Explorar</HeaderItem>
+        <HeaderItem className="header-item">Login</HeaderItem>
+        <HeaderItem className="header-item">Criar</HeaderItem>
+        <HeaderItem className="header-item">
+          <BsCart3 size={25} />5
+        </HeaderItem>
+      </HeaderItems>
+    </HeaderContainer>
   );
 }
 

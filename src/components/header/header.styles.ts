@@ -1,0 +1,48 @@
+import styled from "styled-components";
+
+import Colors from "../../theme/theme.colors";
+
+export const HeaderContainer = styled.header`
+  width: 100%;
+  background-color: ${Colors.background.dark};
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  color: ${Colors.text.white};
+`;
+
+export const HeaderTitle = styled.h2`
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: ease-in-out 0.5s;
+
+  &:hover {
+    color: ${Colors.focus};
+    cursor: pointer;
+  }
+`;
+
+export const HeaderItems = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const HeaderItem = styled.li`
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  transition: ease-in-out 0.5s;
+
+  &:hover {
+    color: ${Colors.focus};
+    cursor: pointer;
+  }
+
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3) {
+    margin-right: 40px;
+  }
+`;
