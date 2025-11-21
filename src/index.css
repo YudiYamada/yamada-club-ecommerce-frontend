@@ -16,16 +16,3 @@ body {
   height: 100%;
 }
 
-:root {
-  --primary: #ffbb33;
-  --second-background: #212529;
-  --text: #f8f9fa;
-  --category-item-background: #ff0000;
-}
-
-.dark {
-  --primary: #ffbb33;
-  --second-background: #f8f9fa;
-  --text: #212529;
-  --category-item-background: #ff0000;
-}
