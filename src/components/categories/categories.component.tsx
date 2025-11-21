@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import env from "../../config/env.config";
 import type { Category } from "../../types/category.types";
+import CategoryItem from "../category-item/category-item.component";
 
 function Categories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -27,9 +28,11 @@ function Categories() {
   return (
     <div className="categories-container">
       <div className="categories-content">
-        {/* {categories.map((category) => (
-          <CategoryItem key={category.id} category={category} />
-        ))} */}
+        {categories.map((category) => (
+          <div key={category.id}>
+            <CategoryItem category={category} />
+          </div>
+        ))}
       </div>
     </div>
   );
