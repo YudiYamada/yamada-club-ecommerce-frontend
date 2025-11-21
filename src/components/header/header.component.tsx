@@ -10,13 +10,13 @@ import {
 function Header() {
   return (
     <HeaderContainer>
-      <HeaderTitle className="header-title">YAMADA CLUB CLOTHING</HeaderTitle>
+      <HeaderTitle>YAMADA CLUB CLOTHING</HeaderTitle>
 
-      <HeaderItems className="header-items">
-        <HeaderItem className="header-item">Explorar</HeaderItem>
+      <HeaderItems>
+        <HeaderItem>Explorar</HeaderItem>
         <HeaderItem className="header-item">Login</HeaderItem>
         <HeaderItem className="header-item">Criar</HeaderItem>
-        <HeaderItem className="header-item">
+        <HeaderItem>
           <BsCart3 size={25} />5
         </HeaderItem>
       </HeaderItems>
