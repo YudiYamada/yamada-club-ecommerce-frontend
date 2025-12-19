@@ -1,9 +1,11 @@
 import { type AuthError, signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
 import { FiLogIn } from "react-icons/fi";
 import validator from "validator";
 
+import Alert from "../../components/alert/alert.component";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import CustomInput from "../../components/custom-input/custom-input.component";
 import Header from "../../components/header/header.component";
@@ -30,15 +32,9 @@ function LoginPage() {
     formState: { errors },
   } = useForm<LoginForm>();
 
+  const [showAlert, setShowAlert] = useState(false);
+
   const handleSubmitPress = async (data: LoginForm) => {
-    // console.log(data);
-    // error de senha Firebase: Error (auth/invalid-credential).
-    // at createErrorInternal (firebase_auth.js?v=ae413fed:698:37)
-    // at _fail (firebase_auth.js?v=ae413fed:660:9)
-    // at _performFetchWithErrorHandling (firebase_auth.js?v=ae413fed:1138:9)
-    // at async _performSignInRequest (firebase_auth.js?v=ae413fed:1149:26)
-    // at async _signInWithCredential (firebase_auth.js?v=ae413fed:4631:20)
-    // at async handleSubmitPress
     try {
       const userCredentials = await signInWithEmailAndPassword(
         auth,
@@ -53,6 +49,8 @@ function LoginPage() {
       if (_error.code === "auth/invalid-credential") {
         setError("email", { type: "invalid" });
         setError("password", { type: "invalid" });
+
+        setShowAlert(true);
         return;
       }
     }
@@ -61,6 +59,14 @@ function LoginPage() {
   return (
     <>
       <Header />
+
+      {showAlert && (
+        <Alert
+          message="O email ou a senha é inválido."
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+
       <LoginContainer>
         <LoginContent>
           <LoginHeadline>Entre com a sua conta</LoginHeadline>
@@ -87,8 +93,7 @@ function LoginPage() {
             {errors?.email?.type === "required" && (
               <InputErrorMessage>O e-mail é obrigatório.</InputErrorMessage>
             )}
-            {(errors?.email?.type === "validate" ||
-              errors?.email?.type === "invalid") && (
+            {errors?.email?.type === "validate" && (
               <InputErrorMessage>O e-mail é inválido.</InputErrorMessage>
             )}
           </LoginInputContainer>
@@ -102,9 +107,6 @@ function LoginPage() {
             />
             {errors?.password?.type === "required" && (
               <InputErrorMessage>A senha é obrigatória.</InputErrorMessage>
-            )}
-            {errors?.password?.type === "invalid" && (
-              <InputErrorMessage>A senha é inválida.</InputErrorMessage>
             )}
           </LoginInputContainer>
 
