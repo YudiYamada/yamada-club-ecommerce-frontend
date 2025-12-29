@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { FiLogIn } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import CustomInput from "../../components/custom-input/custom-input.component";
 import Header from "../../components/header/header.component";
 import InputErrorMessage from "../../components/input-error-message/input-error-message.component";
+import Loading from "../../components/loading/loading.component";
 import { auth, db } from "../../config/firebase.config";
 import { UserContext } from "../../contexts/user.context";
 import {
@@ -40,6 +41,8 @@ function SignUpPage() {
     formState: { errors },
   } = useForm<SignUpForm>();
 
+  const [isLoading, setIsLoaading] = useState(false);
+
   const watchPassword = useWatch({ control, name: "password" });
 
   const { isAuthenticated } = useContext(UserContext);
@@ -52,6 +55,8 @@ function SignUpPage() {
 
   const handleSubmitPress = async (data: SignUpForm) => {
     try {
+      setIsLoaading(true);
+
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -73,12 +78,17 @@ function SignUpPage() {
           type: "alredyInUse",
         });
       }
+    } finally {
+      setIsLoaading(false);
     }
   };
 
   return (
     <>
       <Header />
+
+      {isLoading && <Loading />}
+
       <SignUpContainer>
         <SignUpContent>
           <SignUpHeadline>Crie sua conta</SignUpHeadline>
