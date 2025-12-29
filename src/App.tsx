@@ -3,6 +3,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 
+import Loading from "./components/loading/loading.component";
 import { auth, db } from "./config/firebase.config";
 import { UserContext } from "./contexts/user.context";
 import { userConverter } from "./converters/firestore.converters";
@@ -43,7 +44,7 @@ function App() {
   });
 
   if (isInitializing) {
-    return null;
+    return <Loading />;
   }
 
   console.log(isAuthenticated);
