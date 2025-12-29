@@ -16,6 +16,7 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import CustomInput from "../../components/custom-input/custom-input.component";
 import Header from "../../components/header/header.component";
 import InputErrorMessage from "../../components/input-error-message/input-error-message.component";
+import Loading from "../../components/loading/loading.component";
 import { auth, db, googleProvider } from "../../config/firebase.config";
 import { UserContext } from "../../contexts/user.context";
 import {
@@ -39,6 +40,8 @@ function LoginPage() {
     formState: { errors },
   } = useForm<LoginForm>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { isAuthenticated } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -53,6 +56,8 @@ function LoginPage() {
 
   const handleSubmitPress = async (data: LoginForm) => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -70,11 +75,15 @@ function LoginPage() {
         setShowAlert(true);
         return;
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSignInWithGooglePress = async () => {
     try {
+      setIsLoading(true);
+
       const userCredentials = await signInWithPopup(auth, googleProvider);
 
       const querySnapshot = await getDocs(
@@ -102,12 +111,16 @@ function LoginPage() {
       console.log({ user });
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <Header />
+
+      {isLoading && <Loading />}
 
       {showAlert && (
         <Alert
