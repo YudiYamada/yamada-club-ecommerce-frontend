@@ -21,6 +21,10 @@ function Header() {
     navigate("/");
   };
 
+  const handleExploreClick = () => {
+    navigate("/explore");
+  };
+
   const handleLoginClick = () => {
     navigate("/login");
   };
@@ -34,7 +38,7 @@ function Header() {
       <HeaderTitle onClick={handleHomeClick}>YAMADA CLUB CLOTHING</HeaderTitle>
 
       <HeaderItems>
-        <HeaderItem onClick={handleHomeClick}>Explorar</HeaderItem>
+        <HeaderItem onClick={handleExploreClick}>Explorar</HeaderItem>
 
         {!isAuthenticated && (
           <>
