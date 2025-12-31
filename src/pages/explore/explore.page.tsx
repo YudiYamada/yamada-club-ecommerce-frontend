@@ -7,6 +7,7 @@ const ExplorePage: FunctionComponent = () => {
   return (
     <>
       <Header />
+      <h1>Explorar</h1>
       <CategoriesOverview />
     </>
   );
