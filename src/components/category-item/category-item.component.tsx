@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import type { Category } from "../../types/category.types";
 import { CategoryItemContainer, CategoryName } from "./category-item.styles";
 
@@ -6,9 +8,15 @@ interface CategoryItemProps {
 }
 
 function CategoryItem({ category }: CategoryItemProps) {
+  const navigate = useNavigate();
+
+  const handleExploreClick = () => {
+    navigate(`/category/${category.id}`);
+  };
+
   return (
     <CategoryItemContainer $backgroundImage={category.imageUrl}>
-      <CategoryName>
+      <CategoryName onClick={handleExploreClick}>
         <p>{category.displayName}</p>
         <p>Explorar</p>
       </CategoryName>
